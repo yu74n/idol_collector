@@ -1,0 +1,6 @@
+.scrapy
+.sw*
+idol
+activate
+images
+*/__pycache__
