@@ -16,3 +16,7 @@ class IdolCollectorItem(scrapy.Item):
 class AmebloImageItem(scrapy.Item):
     image_urls = scrapy.Field()
     images = scrapy.Field()
+
+class TwitterImageItem(scrapy.Item):
+    image_urls = scrapy.Field()
+    images = scrapy.Field()

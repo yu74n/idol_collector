@@ -57,6 +57,7 @@ DOWNLOAD_DELAY = 3
 #}
 DOWNLOADER_MIDDLEWARES = {
     'idol_collector.middlewares.ameblo_rss.AmebloRssMiddleware': 550,
+    'idol_collector.middlewares.twitter_search.TwitterSearchMiddleware': 560,
 }
 
 # Enable or disable extensions
@@ -72,7 +73,7 @@ DOWNLOADER_MIDDLEWARES = {
 #}
 
 ITEM_PIPELINES = {
-    'scrapy.pipelines.images.ImagesPipeline': 1,
+    'scrapy.pipelines.images.ImagesPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -96,3 +97,7 @@ HTTPCACHE_EXPIRATION_SECS = 3600
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 IMAGES_STORE = 'images'
+TWITTER_API_ACCESS_TOKEN = ''
+TWITTER_API_ACCESS_TOKEN_SECRET = ''
+TWITTER_API_CONSUMER_KEY = ''
+TWITTER_API_CONSUMER_SECRET = ''
