@@ -14,8 +14,8 @@ class AmebloSpider(scrapy.Spider):
     def start_requests(self):
         base_url = 'http://feedblog.ameba.jp/rss/ameblo/'
         ameba_ids = [
-            #'abirumiyuki-qunqun4',
-            #'yamaokayuka-qunqun4',
+            'abirumiyuki-qunqun4',
+            'yamaokayuka-qunqun4',
             'milky-qunqun',
             'asadamimi-qunqun5',
             'ayaka128love',
