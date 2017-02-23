@@ -12,6 +12,7 @@ class AmebloSpider(scrapy.Spider):
     allowed_domains = ["feedblog.ameba.jp", "ameblo.jp"]
 
     def start_requests(self):
+        base_url = 'http://feedblog.ameba.jp/rss/ameblo/'
         ameba_ids = [
             #'abirumiyuki-qunqun4',
             #'yamaokayuka-qunqun4',
@@ -43,7 +44,8 @@ class AmebloSpider(scrapy.Spider):
         ]
 
         for ameba_id in ameba_ids:
-            yield AmebloRssRequest('http://feedblog.ameba.jp', self.parse, ameba_id=ameba_id)
+            url = base_url + ameba_id
+            yield AmebloRssRequest(url)
 
     def parse(self, response):
         if isinstance(response, AmebloRssResponse):

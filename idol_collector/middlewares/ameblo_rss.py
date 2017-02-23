@@ -6,7 +6,6 @@ logger = logging.getLogger(__name__)
 
 class AmebloRssRequest(scrapy.Request):
     def __init__(self, *args, **kwargs):
-        self.ameba_id = kwargs.pop('ameba_id', None)
         super(AmebloRssRequest, self).__init__(*args, **kwargs)
 
 class AmebloRssResponse(scrapy.http.Response):
@@ -15,11 +14,9 @@ class AmebloRssResponse(scrapy.http.Response):
         super(AmebloRssResponse, self).__init__(*args, **kwargs)
 
 class AmebloRssMiddleware(object):
-    RSS_BASEURL = 'http://feedblog.ameba.jp/rss/ameblo/'
 
     def process_request(self, request, spider):
         if isinstance(request, AmebloRssRequest):
-            url = self.RSS_BASEURL + request.ameba_id
-            logger.info(url)
-            response = feedparser.parse(url)
+            logger.info(request.url)
+            response = feedparser.parse(request.url)
             return AmebloRssResponse(request.url, entries=response.entries)
