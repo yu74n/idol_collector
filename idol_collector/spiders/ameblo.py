@@ -12,7 +12,38 @@ class AmebloSpider(scrapy.Spider):
     allowed_domains = ["feedblog.ameba.jp", "ameblo.jp"]
 
     def start_requests(self):
-        yield AmebloRssRequest('http://feedblog.ameba.jp', self.parse, ameba_id='yamaokayuka-qunqun4')
+        ameba_ids = [
+            #'abirumiyuki-qunqun4',
+            #'yamaokayuka-qunqun4',
+            'milky-qunqun',
+            'asadamimi-qunqun5',
+            'ayaka128love',
+            'sakuraiharuka-qunqun5',
+            'takanamisakura-qunqun7',
+        ]
+        linq_ids = [
+            'natsu-amano',
+            'ayaka-ooba',
+            'mayu-kishida',
+            'maina-kohinata',
+            'yusa-sugimoto',
+            'naoko-hara',
+            'aya-maikawa',
+            'mayu-momosaki',
+            'chiaki-yoshikawa',
+            'kaede-seto',
+            'rana-kaizuki',
+            'kokoro-araki',
+            'sakura-araki',
+            'yuumi-takaki',
+            'asaka-sakai',
+            'ami-himesaki',
+            'kana-fukuyama',
+            'ayano-yamaki',
+        ]
+
+        for ameba_id in ameba_ids:
+            yield AmebloRssRequest('http://feedblog.ameba.jp', self.parse, ameba_id=ameba_id)
 
     def parse(self, response):
         if isinstance(response, AmebloRssResponse):
@@ -20,5 +51,5 @@ class AmebloSpider(scrapy.Spider):
                 yield scrapy.http.Request(entry.link, self.parse_entry)
 
     def parse_entry(self, response):
-        images = response.css('.skinArticleBody2 a img::attr(src)').extract()
+        images = response.css('.skinArticleBody2 .articleText a img::attr(src)').extract()
         yield AmebloImageItem(image_urls=images)
